@@ -153,7 +153,6 @@ const Web3StatusButtonInner = ({ contrastText, withWallet }) => {
         variant="outlined"
         addElevation={false}
         disableWrapper
-        style={{ width: 180 }}
         onClick={switchNetworkMetamask}
       />
     );
@@ -164,7 +163,6 @@ const Web3StatusButtonInner = ({ contrastText, withWallet }) => {
         variant="outlined"
         addElevation={false}
         disableWrapper
-        style={{ width: 180 }}
         onClick={toggleWalletModal}
       />
     );
