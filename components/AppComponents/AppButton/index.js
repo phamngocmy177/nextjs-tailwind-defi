@@ -59,17 +59,17 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0.75, 0.5),
   },
   outlined: {
-    backgroundColor: theme.colors.background1,
-    border: `1px solid ${theme.colors.background1}`,
+    backgroundColor: theme.background1,
+    border: `1px solid ${theme.background1}`,
     "&:hover": {
-      border: `1px solid ${theme.colors.background1}`,
-      backgroundColor: theme.colors.background1,
+      border: `1px solid ${theme.background1}`,
+      backgroundColor: theme.background1,
       color: theme.palette.primary.contrastText,
     },
     "&:focus": {
-      border: `1px solid ${theme.colors.background1}`,
+      border: `1px solid ${theme.background1}`,
       backgroundColor: "transparent",
-      color: theme.colors.background1,
+      color: theme.background1,
     },
   },
   text: {
@@ -79,9 +79,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
   },
   root: {
-    backgroundColor: theme.colors.background1,
+    backgroundColor: theme.background1,
     borderRadius: 6.5,
-    color: theme.colors.text1,
+    color: theme.text1,
   },
 }));
 
@@ -147,29 +147,30 @@ const AppButton = ({
       gutterBottom={gutterBottom}
     >
       <LinkWrapper href={href}>
-        <Button
-          classes={{
-            disabled: disabledClass,
-            label: classNames(
-              trackingClassName,
-              labelClass ||
-                (large ? classes.buttonLabelLarge : classes.buttonLabel)
-            ),
-            root: classNames(
-              classes.root,
-              {
-                [classes.buttonSuccess]: success,
-                [classes.rounded]: rounded,
-                [classes.elevation]: addElevation,
-                [classes.dense]: dense,
-                [classes.outlined]: variant === "outlined",
-                [classes.buttonLarge]: large,
-                [classes.text]: variant === "text",
-              },
-              trackingClassName
-            ),
-          }}
-          fullWidth={fullWidth}
+        <button
+          class="rounded border border-blue-500 hover:border-transparent py-2 px-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white"
+          // classes={{
+          //   disabled: disabledClass,
+          //   label: classNames(
+          //     trackingClassName,
+          //     labelClass ||
+          //       (large ? classes.buttonLabelLarge : classes.buttonLabel)
+          //   ),
+          //   root: classNames(
+          //     classes.root,
+          //     {
+          //       [classes.buttonSuccess]: success,
+          //       [classes.rounded]: rounded,
+          //       [classes.elevation]: addElevation,
+          //       [classes.dense]: dense,
+          //       [classes.outlined]: variant === "outlined",
+          //       [classes.buttonLarge]: large,
+          //       [classes.text]: variant === "text",
+          //     },
+          //     trackingClassName
+          //   ),
+          // }}
+          // fullWidth={fullWidth}
           variant={variant}
           disabled={disabled || loading || success}
           onClick={onClick}
@@ -178,7 +179,7 @@ const AppButton = ({
           aria-busy={loading ? "true" : "false"}
         >
           {label || messages.submitText}
-        </Button>
+        </button>
       </LinkWrapper>
     </ContentWrapper>
   );

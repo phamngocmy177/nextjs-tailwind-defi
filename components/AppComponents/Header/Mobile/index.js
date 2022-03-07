@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     flexGrow: 1,
     width: "100%",
-    backgroundColor: theme.colors.headerBg,
+    backgroundColor: theme.headerBg,
   },
   toolbar: {
     justifyContent: "flex-end",

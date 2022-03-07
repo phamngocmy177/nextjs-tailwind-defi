@@ -1,4 +1,3 @@
-import { ThemeProvider } from "@material-ui/styles";
 import { Web3ReactProvider } from "@web3-react/core";
 import { getLibrary } from "ethereum/utils";
 import dynamic from "next/dynamic";
@@ -9,7 +8,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import wrapper from "state";
-import { useTheme } from "../theme";
 import "./app.css";
 
 const PageChange = dynamic(
@@ -57,8 +55,6 @@ function MyApp({ Component, pageProps }) {
   const store = useStore((state) => state);
   const Layout = Component.layout || (({ children }) => <>{children}</>);
 
-  const theme = useTheme();
-
   return (
     <React.Fragment>
       <Head>
@@ -69,25 +65,23 @@ function MyApp({ Component, pageProps }) {
         <title>Staking App</title>
       </Head>
       <PersistGate persistor={store.__persistor} loading={<PageChange />}>
-        <ThemeProvider theme={theme}>
-          <Web3ReactProvider getLibrary={getLibrary}>
-            <Web3ProviderNetwork getLibrary={getLibrary}>
-              <SnackbarProvider
-                hideIconVariant
-                maxSnack={5}
-                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-                autoHideDuration={10000}
-              >
-                <Web3ReactManager>
-                  <Updaters />
-                  <Layout>
-                    <Component {...pageProps} />
-                  </Layout>
-                </Web3ReactManager>
-              </SnackbarProvider>
-            </Web3ProviderNetwork>
-          </Web3ReactProvider>
-        </ThemeProvider>
+        <Web3ReactProvider getLibrary={getLibrary}>
+          <Web3ProviderNetwork getLibrary={getLibrary}>
+            <SnackbarProvider
+              hideIconVariant
+              maxSnack={5}
+              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              autoHideDuration={10000}
+            >
+              <Web3ReactManager>
+                <Updaters />
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </Web3ReactManager>
+            </SnackbarProvider>
+          </Web3ProviderNetwork>
+        </Web3ReactProvider>
       </PersistGate>
     </React.Fragment>
   );

@@ -41,7 +41,7 @@ const styles = (theme) => ({
   },
   activeLink: {
     fontWeight: 700,
-    color: theme.colors.primary,
+    color: theme.primary,
   },
 });
 

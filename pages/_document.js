@@ -7,7 +7,7 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta charSet="utf-8" />
-          {/* <meta name="theme-color" content={theme.colors.primary} /> */}
+          {/* <meta name="theme-color" content={theme.primary} /> */}
 
           {/* Fonts and icons */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />

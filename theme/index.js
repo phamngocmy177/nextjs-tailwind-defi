@@ -1,7 +1,3 @@
-import { createTheme } from "@material-ui/core/styles";
-import { useMemo } from "react";
-import { useIsDarkMode } from "../state/user/hooks";
-
 export const MEDIA_WIDTHS = {
   upToExtraSmall: 500,
   upToSmall: 720,
@@ -85,35 +81,3 @@ function theme(darkMode) {
     //   `,
   };
 }
-
-export const useTheme = () => {
-  const darkMode = useIsDarkMode();
-  const themeObject = useMemo(() => theme(darkMode), [darkMode]);
-  const myTheme = createTheme({
-    // Theme settings
-    palette: {
-      type: darkMode ? "dark" : "light",
-      primary: {
-        main: "#F8B3C1",
-      },
-    },
-    typography: {
-      fontFamily: "Montserrat",
-    },
-    overrides: {
-      MuiCssBaseline: {
-        "@global": {
-          "@font-face": [
-            {
-              fontFamily: "Montserrat",
-              fontStyle: "normal",
-              fontDisplay: "swap",
-            },
-          ],
-        },
-      },
-    },
-    ...themeObject,
-  });
-  return myTheme;
-};

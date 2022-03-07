@@ -7,7 +7,7 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import classnames from "classnames";
 import React from "react";
-import { useDarkModeManager } from "state/user/hooks";
+import { useDarkMode } from "state/user/hooks";
 import TransactionsCenter from "../../../Web3Components/TransactionsCenter";
 import Web3StatusButton from "../../../Web3Components/Web3StatusButton";
 import { HEADER_LINKS } from "../constants";
@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     boxShadow: "none",
-    backgroundColor: theme.colors.headerBg,
+    backgroundColor: theme.headerBg,
   },
   toolbar: {
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
-    boxShadow: `0px 4px 34px -12px ${theme.colors.headerShadow}`,
+    boxShadow: `0px 4px 34px -12px ${theme.headerShadow}`,
   },
   logoLink: {
     zIndex: 1,
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = useStyles();
-  const [darkMode, toggleSetDarkMode] = useDarkModeManager();
+  const [darkMode, toggleSetDarkMode] = useDarkMode();
 
   return (
     <AppBar
@@ -52,7 +52,7 @@ const Header = () => {
           <Web3StatusButton />
           <IconButton
             sx={{ ml: 1 }}
-            onClick={toggleSetDarkMode}
+            onClick={(e) => toggleSetDarkMode(!darkMode)}
             color="inherit"
           >
             {darkMode ? (

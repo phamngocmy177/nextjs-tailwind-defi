@@ -4,20 +4,20 @@
  *
  */
 
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
+import React from "react";
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: "100vh",
     position: "relative",
-    backgroundColor: theme.colors.mainBg,
+    backgroundColor: theme.mainBg,
   },
 }));
 
 const AppWrapper = ({ children }) => {
   const classes = useStyles();
-  return <div className={classes.root}>{children}</div>;
+
+  return <div className="bg-primary">{children}</div>;
 };
 
 export default AppWrapper;

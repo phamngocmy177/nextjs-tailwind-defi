@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
   },
   title: {
-    color: theme.colors.text1,
+    color: theme.text1,
     fontSize: 14,
     fontWeight: "bold",
     opacity: 0.8,
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "break-word",
   },
   summary: {
-    color: theme.colors.text1,
+    color: theme.text1,
     fontSize: 12,
     fontWeight: 400,
     marginBottom: theme.spacing(1.2),
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "left",
   },
   timeago: {
-    color: theme.colors.text1,
+    color: theme.text1,
     fontSize: 11,
     fontWeight: 400,
   },

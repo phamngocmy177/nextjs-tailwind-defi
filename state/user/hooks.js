@@ -1,27 +1,57 @@
-import { useCallback } from "react";
-import { shallowEqual } from "react-redux";
-import { useAppDispatch, useAppSelector } from "state/hooks";
-import { updateUserDarkMode } from "./actions";
+import { useEffect, useState } from "react";
 
-export function useIsDarkMode() {
-  const { userDarkMode, matchesDarkMode } = useAppSelector(
-    ({ user: { matchesDarkMode, userDarkMode } }) => ({
-      userDarkMode,
-      matchesDarkMode,
-    }),
-    shallowEqual
-  );
+export function useDarkMode() {
+  const prefersDarkMode = usePrefersDarkMode();
+  console.log("prefersDarkMode", prefersDarkMode);
+  // const prefersDarkMode = false;
+  const [isEnabled, setIsEnabled] = useSafeLocalStorage("dark-mode", undefined);
 
-  return userDarkMode === null ? matchesDarkMode : userDarkMode;
+  const enabled = isEnabled === undefined ? prefersDarkMode : isEnabled;
+
+  useEffect(() => {
+    if (window === undefined) return;
+    const root = window.document.documentElement;
+    root.classList.remove(enabled ? "light" : "dark");
+    root.classList.add(enabled ? "dark" : "light");
+  }, [enabled]);
+
+  return [enabled, setIsEnabled];
 }
 
-export function useDarkModeManager() {
-  const dispatch = useAppDispatch();
-  const darkMode = useIsDarkMode();
+export function useSafeLocalStorage(key, initialValue) {
+  const [valueProxy, setValueProxy] = useState(() => {
+    try {
+      const value = window.localStorage.getItem(key);
+      return value ? JSON.parse(value) : initialValue;
+    } catch {
+      return initialValue;
+    }
+  });
 
-  const toggleSetDarkMode = useCallback(() => {
-    dispatch(updateUserDarkMode({ userDarkMode: !darkMode }));
-  }, [darkMode, dispatch]);
+  const setValue = (value) => {
+    console.log("value", value);
+    try {
+      window.localStorage.setItem(key, value);
+      setValueProxy(value);
+    } catch {
+      setValueProxy(value);
+    }
+  };
 
-  return [darkMode, toggleSetDarkMode];
+  return [valueProxy, setValue];
+}
+
+export function usePrefersDarkMode() {
+  const [value, setValue] = useState(true);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    setValue(mediaQuery.matches);
+
+    const handler = () => setValue(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
+
+  return value;
 }
